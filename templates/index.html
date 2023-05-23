@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Imagine Keras</title>
     <link rel="stylesheet" href="../static/css/index.css">
+    <script>
+      let weights = '{{weights | tojson}}'
+      let biases = '{{biases | tojson | safe}}'
+      let neuronValues = '{{neuronValues | tojson}}'
+    </script>
   </head>
   <body>
     <div id="header">
@@ -31,7 +36,7 @@
       </div>
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="../static/js/index.js"></script>
+    <script type="module" src="../static/js/draw-network.js"></script>
     <script src="../static/js/zoom.js"></script>
   </body>
 </html>
