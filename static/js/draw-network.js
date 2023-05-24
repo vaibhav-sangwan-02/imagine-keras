@@ -1,6 +1,6 @@
 import { network } from "./make-network.js"; 
 
-d3.select("svg")
+d3.select("#network-svg")
         .attr("width", "100%")
         .attr("height", "100%")
 

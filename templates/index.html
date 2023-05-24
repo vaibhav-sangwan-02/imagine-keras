@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Imagine Keras</title>
     <link rel="stylesheet" href="../static/css/index.css">
     <script>
       let weights = '{{weights | tojson}}'
@@ -13,27 +12,91 @@
     </script>
   </head>
   <body>
-    <div id="header">
-      <div id = "model-info">
-        Name: <br/>
-        Type: <br/>
-        Accuracy: <br/>
-        Dataset Used: <br/>
+    <div id="left-bar">
+      <div id="form-container">
+        <form action="">
+          <h2>Model Information</h2>
+          <p>Model
+            <select required>
+              <option value = "">--select--</option>
+              <option value = 0>Iris</option>
+              <option value = 1>Breast Cancer</option>
+              <option value = 2>Boston Housing</option>
+              <option value = 3>Stock Prediction</option>
+            </select>
+          </p>
+          <p>Input
+            <select required>
+              <option value = "">--select--</option>
+              <option value = 0>Test Input 1</option>
+              <option value = 1>Test Input 2</option>
+              <option value = 2>Test Input 3</option>
+              <option value = 3>Test Input 4</option>
+            </select>
+          </p>
+          <input type="submit" value="Visualize">
+        </form>
       </div>
-      <div id = "logo">
-      </div>
-      <div id = "neuron-info">
-        Activation Function: <br/>
-        Value: <br/>
+      <div id="legend">
+        <h2>Key</h2>
+        <div id = "key-container">
+          <div class = "key-value-pair">
+            <div class = "key">
+              <svg width = 20px height = 20px>
+                <circle fill = "#7be671" cx = 10 cy = 10 r = 10></circle>
+              </svg>
+            </div>
+            <div class = "value">
+                Positive-valued Neuron
+            </div>
+          </div>
+          <div class = "key-value-pair">
+            <div class = "key">
+              <svg width = 20px height = 20px>
+                <circle fill = "#ff8d93" cx = 10 cy = 10 r = 10></circle>
+              </svg>
+            </div>
+            <div class = "value">
+              Negative-valued Neuron
+            </div>
+          </div>
+          <div class = "key-value-pair">
+            <div class = "key">
+              <svg width = 20px height = 20px>
+                <circle fill = "#9073d3" cx = "10" cy = "10" r = "10"></circle>
+              </svg>
+            </div>
+            <div class = "value">
+              Bias Neuron (Value 1)
+            </div>
+          </div>
+          <div class = "key-value-pair">
+            <div class = "key">
+              <svg width = "20" height = "20">
+                <line x1="0" y1="10" x2="20" y2="10" stroke="#7be671" stroke-width="3"></line>
+              </svg>
+            </div>
+            <div class = "value">
+              Positve-valued Weight
+            </div>
+          </div>
+          <div class = "key-value-pair">
+            <div class = "key">
+              <svg width = "20" height = "20">
+                <line x1="0" y1="10" x2="20" y2="10" stroke="#ff8d93" stroke-width="3"></line>
+              </svg>
+            </div>
+            <div class = "value">
+              Negative-valued Weight
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="content">
-      <div id="controller"></div>
-      <div id="network-container">
-        <svg>
-          <g id = "network-group"></g>
-        </svg>
-      </div>
+    <div id="network-container">
+      <svg id="network-svg">
+        <g id = "network-group"></g>
+      </svg>
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script type="module" src="../static/js/draw-network.js"></script>
