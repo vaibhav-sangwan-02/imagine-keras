@@ -14,26 +14,25 @@
   <body>
     <div id="left-bar">
       <div id="form-container">
-        <form action="">
+        <form>
           <h2>Model Information</h2>
-          <p>Model
-            <select required>
-              <option value = "">--select--</option>
-              <option value = 0>Iris</option>
-              <option value = 1>Breast Cancer</option>
-              <option value = 2>Boston Housing</option>
-              <option value = 3>Stock Prediction</option>
+          <div class ="dropdown-container"><div class="dropdown-key">Model</div>
+            <select required class="dropdown-field" id="model-dropdown-field">
+              <option value = "not selected">--select--</option>
+              <option value = "custom">Upload Custom Model</option>
+              <option value = "./../models/iris/trained">Iris (trained)</option>
+              <option value = "./../models/iris/untrained">Iris (untrained)</option>
+              <option value = "./../models/titanic/trained">Titanic (trained)</option>
+              <option value = "./../models/titanic/untrained">Titanic (untrained)</option>
+              <option value = "./../models/boston_housing/trained">Boston Housing (trained)</option>
+              <option value = "./../models/boston_housing/untrained">Boston Housing (untrained)</option>
             </select>
-          </p>
-          <p>Input
-            <select required>
-              <option value = "">--select--</option>
-              <option value = 0>Test Input 1</option>
-              <option value = 1>Test Input 2</option>
-              <option value = 2>Test Input 3</option>
-              <option value = 3>Test Input 4</option>
-            </select>
-          </p>
+          </div>
+          <div class="dropdown-container" id="input-dropdown-container" style="display:none;"><div class="dropdown-key">Input</div>
+            <select required class= "dropdown-field" id="input-dropdown-field"></select>
+          </div>
+          <textarea id="input-textarea" rows=5 style="display:none;"
+          placeholder="[feature_1, feature_2, feature_3 ...  feature_N]"></textarea>
           <input type="submit" value="Visualize">
         </form>
       </div>
@@ -92,6 +91,7 @@
           </div>
         </div>
       </div>
+      <div class = "tooltip"></div>
     </div>
     <div id="network-container">
       <svg id="network-svg">
@@ -101,5 +101,6 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script type="module" src="../static/js/draw-network.js"></script>
     <script src="../static/js/zoom.js"></script>
+    <script src="../static/js/form.js"></script>
   </body>
 </html>

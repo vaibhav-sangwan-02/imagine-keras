@@ -17,6 +17,8 @@ for(let connection of network.connections) {
                 .attr("stroke-width", connection.strokeWidth)
 }
 
+let tooltip = d3.select(".tooltip")
+
 // Drawing the neurons
 for(let layer of network.layers)
 {
@@ -27,5 +29,14 @@ for(let layer of network.layers)
                         .attr("cy", neuron.y)
                         .attr("r", neuron.radius)
                         .attr("fill", neuron.color)
+                        .on("mouseover",
+                                function() {
+                                        tooltip.html("Value: " + Math.round(neuron.value * 10000) / 10000)
+                                                .style("visibility", "visible")
+                                })
+                        .on("mouseout",
+                                function() {
+                                        tooltip.style("visibility", "hidden")
+                                })
         }
 }
