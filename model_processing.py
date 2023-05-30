@@ -1,6 +1,14 @@
 from keras import backend as K
 import numpy as np
 
+# returns a dictionary containing weights, biases and neuron values of the model
+def get_model_parameters(model, testInput):
+    res = {}
+    res['weights'] = get_weights(model)
+    res['biases'] = get_biases(model)
+    res['neuronValues'] = get_neuron_values(model, testInput)
+    return res
+
 # returns the weights of model as a list
 def get_weights(model):
     weights = []
@@ -14,7 +22,7 @@ def get_biases(model):
     for layerIndex in range(len(model.layers)):
         layer = model.layers[layerIndex]
         if(len(layer.get_weights()) > 1):
-            biases[layerIndex] = layer.get_weights()[1].tolist()
+            biases[(str)(layerIndex)] = layer.get_weights()[1].tolist() # dictionary keys are type casted into string because json object keys must be of string type
     return biases
 
 # returns a list of all neuron outputs for testInput

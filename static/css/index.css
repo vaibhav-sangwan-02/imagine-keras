@@ -47,7 +47,7 @@ body {
     background-color: #271a3e;
 }
 
-input[type="submit"] {
+#visualize-button {
     width: calc(100% - 40px);
     border: none;
     padding: 10px 0;
