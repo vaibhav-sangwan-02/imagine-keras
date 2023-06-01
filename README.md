@@ -1,7 +1,7 @@
 # Imagine Keras
 Imagine Keras is a Flask based web application which can picture the weights and biases of Keras based Neural Networks.
 ### Instructions
-####Setup
+#### Setup
 1. Download following dependencies:
     * Python 3.10.4
     * Flask 2.3.2
@@ -9,18 +9,21 @@ Imagine Keras is a Flask based web application which can picture the weights and
     * Pandas 2.0.1
     * Numpy 1.23.5
 <br />
-2. Run this command in command prompt:
+2. Run this command in command prompt<br />
+
 ```cmd
 git clone https://github.com/vaibhav-sangwan/imagine-keras.git
 ```
+
 3. Navigate to the cloned repository in Command Prompt
 <br />
-4. Run this command in command prompt:
+4. Run this command in command promp:
+
 ```cmd
 python app.py
 ```
 
-####Use
+#### Use
 There are 3 testing models available for visualization.
 1. Iris Model - This model consists of 4 Dense layers with 8, 4 and 3 units respectively. It is a Multi-class classification model trained on the Iris Dataset (available in SKLearn).
 2. Titanic Model - This model consists of 4 Dense layers with 8, 4, 2 and 1 unit respectively. It is a binary classification model trained on the Titanic Dataset (available in Seaborn).
