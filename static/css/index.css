@@ -122,3 +122,28 @@ body {
     background-color: #221738;
     color: white;
 }
+
+
+#upload-files-container {
+    display: none;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: stretch;
+    opacity: 0.9;
+}
+
+label {
+    padding: 15px 0px;
+    border: 2px dashed #7e778d;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    background-color: #221738;   
+    cursor: pointer;   
+}
+
+#uploaded-model-name {
+    font-size: small;
+    font-family:'Courier New', Courier, monospace;
+    color: #64ba4f;
+}

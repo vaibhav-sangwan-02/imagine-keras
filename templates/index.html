@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../static/css/index.css">
-    <script>
-      let weights = '{{weights | tojson}}'
-      let biases = '{{biases | tojson | safe}}'
-      let neuronValues = '{{neuronValues | tojson}}'
-    </script>
   </head>
   <body>
     <div id="left-bar">
@@ -28,11 +23,18 @@
               <option value = "./models/boston_housing/untrained">Boston Housing (untrained)</option>
             </select>
           </div>
+          <div id="upload-files-container">
+            <label for="upload-files-button" id="upload-files-button-label">
+              Click to Upload
+              <div id="uploaded-model-name"></div>
+              <input type="file" id="upload-files-button" style="display: none;" webkitdirectory mozdirectory msdirectory odirectory directory multiple>
+            </label>
+          </div>
           <div class="dropdown-container" id="input-dropdown-container" style="display:none;"><div class="dropdown-key">Input</div>
             <select required class= "dropdown-field" id="input-dropdown-field" name="inputDropdown"></select>
           </div>
           <textarea id="input-textarea" rows=5 style="display:none;"
-          placeholder="[feature_1, feature_2, feature_3 ...  feature_N]" name="inputArea"></textarea>
+          placeholder="[feature_1, feature_2, feature_3 ...  feature_N]" name="inputTextarea"></textarea>
           <button id="visualize-button" type="submit">Visualize</button>
         </form>
       </div>
@@ -99,7 +101,6 @@
       </svg>
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="module" src="../static/js/draw-network.js"></script>
     <script src="../static/js/zoom.js"></script>
     <script src="../static/js/form.js"></script>
     <script type="module" src="../static/js/visualize.js"></script>
