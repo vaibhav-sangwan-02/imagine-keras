@@ -9,10 +9,10 @@
   <body>
     <div id="left-bar">
       <div id="form-container">
-        <form id="model-info-form">
+        <form id="model-info-form" enctype="multipart/form-data">
           <h2>Model Information</h2>
           <div class ="dropdown-container"><div class="dropdown-key">Model</div>
-            <select required class="dropdown-field" id="model-dropdown-field" name="model">
+            <select class="dropdown-field" id="model-dropdown-field" name="model">
               <option value = "not selected">--select--</option>
               <option value = "custom">Upload Custom Model</option>
               <option value = "./models/iris/trained">Iris (trained)</option>
@@ -27,11 +27,13 @@
             <label for="upload-files-button" id="upload-files-button-label">
               Click to Upload
               <div id="uploaded-model-name"></div>
-              <input type="file" id="upload-files-button" style="display: none;" webkitdirectory mozdirectory msdirectory odirectory directory multiple>
+              <input type="file" id="upload-files-button" style="display: none;" name="folder" webkitdirectory mozdirectory msdirectory odirectory directory multiple>
             </label>
           </div>
           <div class="dropdown-container" id="input-dropdown-container" style="display:none;"><div class="dropdown-key">Input</div>
-            <select required class= "dropdown-field" id="input-dropdown-field" name="inputDropdown"></select>
+            <select class= "dropdown-field" id="input-dropdown-field" name="inputDropdown">
+              <option value = "custom">Custom Input</option>
+            </select>
           </div>
           <textarea id="input-textarea" rows=5 style="display:none;"
           placeholder="[feature_1, feature_2, feature_3 ...  feature_N]" name="inputTextarea"></textarea>

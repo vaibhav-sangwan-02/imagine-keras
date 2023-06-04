@@ -9,46 +9,36 @@ let inputTextarea = document.getElementById("input-textarea")
 
 // Called when user changes selection of model-dropdown-field.
 function modelFieldChanged() {
-    changeInputOptions()
     if(modelDropdown.value == "not selected") {
         uploadFilesContainer.style.display = "none"
         inputDropdownContainer.style.display = "none"
-        inputDropdown.value = "custom"
         inputTextarea.style.display = "none"
-        inputTextarea.value = ""
     }
     else {
-        inputDropdownContainer.style.display = "flex"
-        if(modelDropdown.value == "custom") {
+        if(modelDropdown.value == "custom")
             uploadFilesContainer.style.display = "flex"
-            inputDropdown.value = "custom"
-        }
-        else {
+        else
             uploadFilesContainer.style.display = "none"
-            inputDropdown.value = 0  // Setting the default input to test case 1 for non-custom models(Testing models).
-        }
+        inputDropdownContainer.style.display = "flex"
         inputTextarea.style.display = "block"
-        inputTextarea.value = ""
     }
+
+    changeInputOptions()
+    inputDropdown.value = "custom"
     inputFieldChanged()
 }
 
 // This function updates the list of input select dropdown options for a given model.
 function changeInputOptions() {
-    while(inputDropdown.options.length > 0) {
-        inputDropdown.remove(0)
+    while(inputDropdown.options.length > 1) {
+        inputDropdown.remove(1)
     }
 
     // Add test inputs only if the selected model is not a custom model. Currently, all the testing models contain 3 test inputs.
     if(modelDropdown.value != "custom") {
-        for(let i = 0; i < 3; i++) {
-            let newOption = new Option("Test Input " + (i + 1), i)
-            inputDropdown.add(newOption)
-        }
+        for(let i = 0; i < 3; i++)
+            inputDropdown.add(new Option("Test Input " + (i + 1), i))
     }
-
-    // Giving the user an option to write custom inputs.
-    inputDropdown.add(new Option("Custom Input", "custom"))
 }
 
 // Called when user changes selection of input-dropdown-field. If the selected value is a test input, then it fetches the test input from respective path and writes it inside of input-textarea.
@@ -61,9 +51,9 @@ async function inputFieldChanged() {
             model: modelDropdown.value,
             inputDropdown: inputDropdown.value
         }
-        await fetch("/test-inputs/", {
+        await fetch("/test-input/", {
             method  : 'POST',
-            headers : {
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(inputs)
