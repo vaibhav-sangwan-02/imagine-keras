@@ -1,7 +1,7 @@
 import { makeNetwork } from "./make-network.js";
 import { resetZoom } from "./zoom.js";
 
-let tooltip = d3.select(".tooltip")
+let tooltip = d3.select("#neuron-value-tooltip")
 let group = d3.select("#network-group")
 
 // Clears up the existing model representation and then draws a new model in network-container
@@ -41,11 +41,11 @@ function drawNeurons(network) {
                                 .on("mouseover",
                                         function() {
                                                 tooltip.html("Value: " + Math.round(neuron.value * 10000) / 10000)
-                                                        .style("visibility", "visible")
+                                                        .style("display", "block")
                                         })
                                 .on("mouseout",
                                         function() {
-                                                tooltip.style("visibility", "hidden")
+                                                tooltip.style("display", "none")
                                         })
                 }
         }

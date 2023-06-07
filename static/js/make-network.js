@@ -1,6 +1,5 @@
 import { Connection, Layer, Network} from "./network-components.js";
 
-
 export function makeNetwork(model) {
     let weights = model["weights"]
     let biases = model["biases"]
@@ -8,7 +7,7 @@ export function makeNetwork(model) {
 
     let nodes = makeNodes(weights)
     let network = addNeurons(nodes, biases, neuronValues)
-    setNeuronParamsLayerBased(network)
+    setNeuronParams(network)
     addConnections(nodes, weights, biases, network)
     return network
 }
@@ -55,29 +54,39 @@ function addNeurons(nodes, biases, neuronValues) {
     return network
 }
 
-function setNeuronParamsLayerBased(network) {
+// The radius of each neuron will be determined based on its value relative to the minimum and maximum values of same layer neurons.
+function setNeuronParams(network) {
     for(let layer of network.layers) {
-        let neuronMinValue = Number.MAX_VALUE, neuronMaxValue = 0 
+        let neuronMinValue = Number.MAX_VALUE, neuronMaxValue = 0
         for(let neuron of layer.neurons) {
             neuronMinValue = Math.min(neuronMinValue, Math.abs(neuron.value))
             neuronMaxValue = Math.max(neuronMaxValue, Math.abs(neuron.value))
         }
-        if(Math.abs(neuronMaxValue - neuronMinValue) > 0.001) {
-            let linearCoeff = (30 - 15)/(neuronMaxValue - neuronMinValue)
-            for(let neuron of layer.neurons) {
-                neuron.radius = 15 + (linearCoeff * Math.abs(neuron.value))
-                if(neuron.value < 0) {
-                    neuron.color = "#ff8d93"
-                }
-                else {
-                    neuron.color = "#7be671"
-                }
+        for(let neuron of layer.neurons) {
+            neuron.radius = linearScale(Math.abs(neuron.value), neuronMinValue, neuronMaxValue, 15, 30)
+            if(neuron.value < 0) {
+                neuron.color = "#ff8d93"
+            }
+            else {
+                neuron.color = "#7be671"
             }
         }
         // Setting the color of bias
         if(layer.neurons[layer.neurons.length - 1].isBias) {
             layer.neurons[layer.neurons.length - 1].color = "#9073d3"
         }
+    }
+}
+
+// returns y = f(x), such that rMin = f(dMin) and rMax = f(dMax). In simpler terms, it maps one portion of number line to another portion of number line in a linear fashion.
+// dMin and dMax represents minimum and maximum value of domain of f respectively.
+// rMin and rMax represents minimum and maximum value of range of f respectively.
+function linearScale(x, dMin, dMax, rMin, rMax) {
+    if(dMin == dMax)
+        return (rMax + rMin)/2;
+    else {
+        let slope = (rMax - rMin)/(dMax - dMin)
+        return rMin + (slope * (x - dMin))
     }
 }
 
@@ -115,16 +124,13 @@ function addConnections(nodes, weights, biases, network) {
         connectionMinValue = Math.min(connectionMinValue, Math.abs(connection.value))
         connectionMaxValue = Math.max(connectionMaxValue, Math.abs(connection.value))
     }
-    if(connectionMaxValue - connectionMinValue >  0.000001) {
-        let linearCoeff = (5)/(connectionMaxValue - connectionMinValue)
-        for(let connection of network.connections) {
-            connection.strokeWidth = (linearCoeff * Math.abs(connection.value))
-            if(connection.value < 0) {
-                connection.color = "#ff8d93"
-            }
-            else {
-                connection.color = "#7be671"
-            }
+    for(let connection of network.connections) {
+        connection.strokeWidth = linearScale(Math.abs(connection.value), connectionMinValue, connectionMaxValue, 0, 5)
+        if(connection.value < 0) {
+            connection.color = "#ff8d93"
+        }
+        else {
+            connection.color = "#7be671"
         }
     }
 }

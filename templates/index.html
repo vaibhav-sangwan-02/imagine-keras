@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="left-bar">
-      <div id="form-container">
+      <div id="form-container" class="block">
         <form id="model-info-form" enctype="multipart/form-data">
           <h2>Model Information</h2>
           <div class ="dropdown-container"><div class="dropdown-key">Model</div>
@@ -40,7 +40,7 @@
           <button id="visualize-button" type="submit">Visualize</button>
         </form>
       </div>
-      <div id="legend">
+      <div id="legend" class="block">
         <h2>Key</h2>
         <div id = "key-container">
           <div class = "key-value-pair">
@@ -95,15 +95,15 @@
           </div>
         </div>
       </div>
-      <div class = "tooltip"></div>
     </div>
-    <div id="network-container">
-      <svg id="network-svg">
-        <g id = "network-group"></g>
-      </svg>
-    </div>
+      <div id="network-container">
+        <div id = "neuron-value-tooltip" class="block"></div>
+        <svg id="network-svg">
+          <g id = "network-group"></g>
+        </svg>
+      </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="../static/js/zoom.js"></script>
+    <script type="model" src="../static/js/zoom.js"></script>
     <script src="../static/js/form.js"></script>
     <script type="module" src="../static/js/visualize.js"></script>
   </body>
